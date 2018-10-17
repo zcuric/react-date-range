@@ -1,7 +1,7 @@
 /* eslint-disable no-fallthrough */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import DayCell, { rangeShape } from './DayCell.js';
+import DayCell, { rangeShape } from '../DayCell';
 import {
   format,
   startOfDay,
@@ -15,10 +15,11 @@ import {
   isWithinInterval,
   eachDayOfInterval,
 } from 'date-fns';
-import { getMonthDisplayRange } from '../utils';
+import { getMonthDisplayRange } from '../../utils';
 
-function renderWeekdays(styles, dateOptions) {
+const renderWeekdays = (styles, dateOptions) => {
   const now = new Date();
+
   return (
     <div className={styles.weekDays}>
       {eachDayOfInterval({
@@ -31,7 +32,7 @@ function renderWeekdays(styles, dateOptions) {
       ))}
     </div>
   );
-}
+};
 
 class Month extends PureComponent {
   render() {
@@ -53,6 +54,7 @@ class Month extends PureComponent {
       });
     }
     const showPreview = this.props.showPreview && !drag.disablePreview;
+
     return (
       <div className={styles.month} style={this.props.style}>
         {this.props.showMonthName ? (

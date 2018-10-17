@@ -1,4 +1,4 @@
-import Calendar from './Calendar';
+import Calendar from './index';
 
 describe('Calendar', () => {
   test('Should resolve', () => {

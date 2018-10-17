@@ -1,10 +1,10 @@
 /* eslint-disable no-fallthrough */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { startOfDay, format, isSameDay, isAfter, isBefore, endOfDay } from 'date-fns';
 
-class DayCell extends Component {
+class DayCell extends PureComponent {
   constructor(props, context) {
     super(props, context);
 
@@ -32,6 +32,7 @@ class DayCell extends Component {
         break;
     }
   }
+
   handleMouseEvent(event) {
     const { day, disabled, onPreviewChange } = this.props;
     const stateChanges = {};
@@ -67,6 +68,7 @@ class DayCell extends Component {
       this.setState(stateChanges);
     }
   }
+
   getClassNames() {
     const {
       isPassive,
@@ -93,6 +95,7 @@ class DayCell extends Component {
       [styles.dayActive]: this.state.active,
     });
   }
+
   renderPreviewPlaceholder() {
     const { preview, day, styles } = this.props;
     if (!preview) return null;
@@ -113,6 +116,7 @@ class DayCell extends Component {
       />
     );
   }
+
   renderSelectionPlaceholders() {
     const { styles, ranges, day } = this.props;
     if (this.props.displayMode === 'date') {
@@ -160,6 +164,7 @@ class DayCell extends Component {
       />
     ));
   }
+
   render() {
     const { styles } = this.props;
     return (

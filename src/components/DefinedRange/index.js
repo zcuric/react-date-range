@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styles from '../styles';
-import { defaultInputRanges, defaultStaticRanges } from '../defaultRanges';
-import { rangeShape } from './DayCell';
 import cx from 'classnames';
+import styles from '../../styles';
+import { defaultInputRanges, defaultStaticRanges } from '../../defaultRanges';
+import { rangeShape } from '../DayCell';
 
 class DefinedRanges extends Component {
   constructor(props) {
@@ -14,6 +14,7 @@ class DefinedRanges extends Component {
     };
     this.handleRangeChange = this.handleRangeChange.bind(this);
   }
+
   handleRangeChange(range) {
     const { onChange, ranges, focusedRange } = this.props;
     const selectedRange = ranges[focusedRange[0]];
@@ -22,16 +23,20 @@ class DefinedRanges extends Component {
       [selectedRange.key || `range${focusedRange[0] + 1}`]: { ...selectedRange, ...range },
     });
   }
+
   getSelectedRange(ranges, staticRange) {
     const focusedRangeIndex = ranges.findIndex(range => {
       if (!range.startDate || !range.endDate || range.disabled) return false;
       return staticRange.isSelected(range);
     });
     const selectedRange = ranges[focusedRangeIndex];
+
     return { selectedRange, focusedRangeIndex };
   }
+
   render() {
     const { onPreviewChange, ranges, rangeColors, className } = this.props;
+
     return (
       <div className={cx(styles.definedRangesWrapper, className)}>
         {this.props.headerContent}
