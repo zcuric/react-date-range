@@ -1,10 +1,11 @@
 /* eslint-disable no-fallthrough */
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { startOfDay, format, isSameDay, isAfter, isBefore, endOfDay } from 'date-fns';
+import isEqual from 'react-fast-compare';
 
-class DayCell extends PureComponent {
+class DayCell extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -12,14 +13,13 @@ class DayCell extends PureComponent {
       hover: false,
       active: false,
     };
-    this.getClassNames = this.getClassNames.bind(this);
-    this.handleMouseEvent = this.handleMouseEvent.bind(this);
-    this.handleKeyEvent = this.handleKeyEvent.bind(this);
-    this.renderSelectionPlaceholders = this.renderSelectionPlaceholders.bind(this);
-    this.renderPreviewPlaceholder = this.renderPreviewPlaceholder.bind(this);
   }
 
-  handleKeyEvent(event) {
+  shouldComponentUpdate(nextProps) {
+    return !isEqual(this.props, nextProps);
+  }
+
+  handleKeyEvent = event => {
     const { day } = this.props;
     switch (event.keyCode) {
       case 13: //space
@@ -31,9 +31,9 @@ class DayCell extends PureComponent {
         }
         break;
     }
-  }
+  };
 
-  handleMouseEvent(event) {
+  handleMouseEvent = event => {
     const { day, disabled, onPreviewChange } = this.props;
     const stateChanges = {};
     if (disabled) {
@@ -67,9 +67,9 @@ class DayCell extends PureComponent {
     if (Object.keys(stateChanges).length) {
       this.setState(stateChanges);
     }
-  }
+  };
 
-  getClassNames() {
+  getClassNames = () => {
     const {
       isPassive,
       isToday,
@@ -94,15 +94,14 @@ class DayCell extends PureComponent {
       [styles.dayHovered]: this.state.hover,
       [styles.dayActive]: this.state.active,
     });
-  }
+  };
 
-  renderPreviewPlaceholder() {
+  renderPreviewPlaceholder = () => {
     const { preview, day, styles } = this.props;
     if (!preview) return null;
     const startDate = preview.startDate ? endOfDay(preview.startDate) : null;
     const endDate = preview.endDate ? startOfDay(preview.endDate) : null;
-    const isInRange =
-      (!startDate || isAfter(day, startDate)) && (!endDate || isBefore(day, endDate));
+    const isInRange = (!startDate || isAfter(day, startDate)) && (!endDate || isBefore(day, endDate));
     const isStartEdge = !isInRange && isSameDay(day, startDate);
     const isEndEdge = !isInRange && isSameDay(day, endDate);
     return (
@@ -115,15 +114,13 @@ class DayCell extends PureComponent {
         style={{ color: preview.color }}
       />
     );
-  }
+  };
 
-  renderSelectionPlaceholders() {
+  renderSelectionPlaceholders = () => {
     const { styles, ranges, day } = this.props;
     if (this.props.displayMode === 'date') {
       let isSelected = isSameDay(this.props.day, this.props.date);
-      return isSelected ? (
-        <span className={styles.selected} style={{ color: this.props.color }} />
-      ) : null;
+      return isSelected ? <span className={styles.selected} style={{ color: this.props.color }} /> : null;
     }
 
     const inRanges = ranges.reduce((result, range) => {
@@ -134,8 +131,7 @@ class DayCell extends PureComponent {
       }
       startDate = startDate ? endOfDay(startDate) : null;
       endDate = endDate ? startOfDay(endDate) : null;
-      const isInRange =
-        (!startDate || isAfter(day, startDate)) && (!endDate || isBefore(day, endDate));
+      const isInRange = (!startDate || isAfter(day, startDate)) && (!endDate || isBefore(day, endDate));
       const isStartEdge = !isInRange && isSameDay(day, startDate);
       const isEndEdge = !isInRange && isSameDay(day, endDate);
       if (isInRange || isStartEdge || isEndEdge) {
@@ -163,10 +159,11 @@ class DayCell extends PureComponent {
         style={{ color: range.color || this.props.color }}
       />
     ));
-  }
+  };
 
   render() {
-    const { styles } = this.props;
+    const { styles, disabled, isPassive, color, day } = this.props;
+    const tabIndex = disabled || isPassive ? -1 : null;
     return (
       <button
         type="button"
@@ -180,12 +177,12 @@ class DayCell extends PureComponent {
         onKeyDown={this.handleKeyEvent}
         onKeyUp={this.handleKeyEvent}
         className={this.getClassNames(styles)}
-        {...(this.props.disabled || this.props.isPassive ? { tabIndex: -1 } : {})}
-        style={{ color: this.props.color }}>
+        tabIndex={tabIndex}
+        style={{ color: color }}>
         {this.renderSelectionPlaceholders()}
         {this.renderPreviewPlaceholder()}
         <span className={styles.dayNumber}>
-          <span>{format(this.props.day, 'D')}</span>
+          <span>{format(day, 'D')}</span>
         </span>
       </button>
     );
