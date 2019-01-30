@@ -33,12 +33,14 @@
     "url": "http://github.com/Adphorus/react-date-range/issues"
   },
   "dependencies": {
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
     "classnames": "^2.2.1",
     "date-fns": "2.0.0-alpha.7",
     "prop-types": "^15.5.10",
-    "react-list": "^0.8.8"
+    "react": "^16.7.0-alpha.0",
+    "react-dom": "^16.7.0-alpha.0",
+    "react-fast-compare": "^2.0.2",
+    "react-list": "^0.8.8",
+    "why-did-you-update": "^0.1.1"
   },
   "peerDependencies": {
     "react": "^0.14 || ^15.0.0-rc || >=15.0"

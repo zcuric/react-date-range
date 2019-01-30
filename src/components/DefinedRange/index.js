@@ -50,16 +50,12 @@ class DefinedRanges extends Component {
                   [styles.staticRangeSelected]: Boolean(selectedRange),
                 })}
                 style={{
-                  color: selectedRange
-                    ? selectedRange.color || rangeColors[focusedRangeIndex]
-                    : null,
+                  color: selectedRange ? selectedRange.color || rangeColors[focusedRangeIndex] : null,
                 }}
                 key={i}
                 onClick={() => this.handleRangeChange(staticRange.range(this.props))}
                 onFocus={() => onPreviewChange && onPreviewChange(staticRange.range(this.props))}
-                onMouseOver={() =>
-                  onPreviewChange && onPreviewChange(staticRange.range(this.props))
-                }
+                onMouseOver={() => onPreviewChange && onPreviewChange(staticRange.range(this.props))}
                 onMouseLeave={() => {
                   this.props.onPreviewChange && this.props.onPreviewChange();
                 }}>

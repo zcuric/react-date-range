@@ -180,7 +180,6 @@ class DayCell extends Component {
         tabIndex={tabIndex}
         style={{ color: color }}>
         {this.renderSelectionPlaceholders()}
-        {this.renderPreviewPlaceholder()}
         <span className={styles.dayNumber}>
           <span>{format(day, 'D')}</span>
         </span>

@@ -152,16 +152,8 @@ export default class Main extends Component {
 
         <Section title="DateRangePicker - 2 month">
           <div>
-            <input
-              type="text"
-              readOnly
-              value={formatDateDisplay(this.state.dateRangePicker.selection.startDate)}
-            />
-            <input
-              type="text"
-              readOnly
-              value={formatDateDisplay(this.state.dateRangePicker.selection.endDate)}
-            />
+            <input type="text" readOnly value={formatDateDisplay(this.state.dateRangePicker.selection.startDate)} />
+            <input type="text" readOnly value={formatDateDisplay(this.state.dateRangePicker.selection.endDate)} />
           </div>
           <div>
             <DateRangePicker
@@ -178,16 +170,8 @@ export default class Main extends Component {
 
         <Section title="DateRangePicker - Vertical Infinite">
           <div>
-            <input
-              type="text"
-              readOnly
-              value={formatDateDisplay(this.state.dateRangePickerI.selection.startDate)}
-            />
-            <input
-              type="text"
-              readOnly
-              value={formatDateDisplay(this.state.dateRangePickerI.selection.endDate)}
-            />
+            <input type="text" readOnly value={formatDateDisplay(this.state.dateRangePickerI.selection.startDate)} />
+            <input type="text" readOnly value={formatDateDisplay(this.state.dateRangePickerI.selection.endDate)} />
           </div>
           <div>
             <DateRangePicker
@@ -259,20 +243,14 @@ export default class Main extends Component {
 
         <Section title="DatePicker - Internationalization">
           <div>
-            <select
-              onChange={e => this.setState({ locale: e.target.value })}
-              value={this.state.locale}>
+            <select onChange={e => this.setState({ locale: e.target.value })} value={this.state.locale}>
               {localeOptions.map((option, i) => (
                 <option value={option.value} key={i}>
                   {option.label}
                 </option>
               ))}
             </select>
-            <input
-              type="text"
-              readOnly
-              value={formatDateDisplay(this.state.datePickerInternational)}
-            />
+            <input type="text" readOnly value={formatDateDisplay(this.state.datePickerInternational)} />
           </div>
           <Calendar
             locale={rdrLocales[this.state.locale]}
@@ -284,11 +262,7 @@ export default class Main extends Component {
 
         <Section title="RangePicker">
           <div>
-            <input
-              type="text"
-              readOnly
-              value={formatDateDisplay(this.state.dateRange.selection.startDate)}
-            />
+            <input type="text" readOnly value={formatDateDisplay(this.state.dateRange.selection.startDate)} />
             <input
               type="text"
               readOnly
@@ -305,11 +279,7 @@ export default class Main extends Component {
         </Section>
         <Section title="DefinedRange">
           <div>
-            <input
-              type="text"
-              readOnly
-              value={formatDateDisplay(this.state.definedRange.selection.startDate)}
-            />
+            <input type="text" readOnly value={formatDateDisplay(this.state.definedRange.selection.startDate)} />
             <input
               type="text"
               readOnly
@@ -333,10 +303,7 @@ export default class Main extends Component {
             <input
               type="text"
               readOnly
-              value={formatDateDisplay(
-                this.state.dateRangeWithDisabled.selection.endDate,
-                'Continuous'
-              )}
+              value={formatDateDisplay(this.state.dateRangeWithDisabled.selection.endDate, 'Continuous')}
             />
           </div>
 

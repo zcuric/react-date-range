@@ -1,12 +1,5 @@
 import classnames from 'classnames';
-import {
-  addMonths,
-  areIntervalsOverlapping,
-  startOfMonth,
-  endOfMonth,
-  startOfWeek,
-  endOfWeek,
-} from 'date-fns';
+import { addMonths, areIntervalsOverlapping, startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 
 export function calcFocusDate(currentFocusedDate, props) {
   const { shownDate, date, months, ranges, focusedRange, displayMode } = props;
@@ -67,13 +60,11 @@ export function getMonthDisplayRange(date, dateOptions) {
 
 export function generateStyles(sources) {
   if (!sources.length) return {};
-  const generatedStyles = sources
-    .filter(source => Boolean(source))
-    .reduce((styles, styleSource) => {
-      Object.keys(styleSource).forEach(key => {
-        styles[key] = classnames(styles[key], styleSource[key]);
-      });
-      return styles;
-    }, {});
+  const generatedStyles = sources.filter(source => Boolean(source)).reduce((styles, styleSource) => {
+    Object.keys(styleSource).forEach(key => {
+      styles[key] = classnames(styles[key], styleSource[key]);
+    });
+    return styles;
+  }, {});
   return generatedStyles;
 }
